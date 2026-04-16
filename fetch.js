@@ -32,6 +32,10 @@ fetch(url)
         console.log(datos);                             // genero los mismos datos pero con un mejor manejo de errores
     
     })
+    .catch((error)=> {
+        console.log(`Error ${error}`);                  //en caso de error, mostrar el error  
+
+    })
 
 
     // .then(res => res.json())
@@ -45,12 +49,14 @@ fetch(url)
         try{
             const response = await fetch(url);            //constante de la respuesta de la consulta
             if(!response.ok){                               //viendo en caso de error
-            console.log('Error');
+            console.log('error');
             }
             const productos = await response.json();
             console.log(productos);
 
-        }catch{
+        }catch(error){
+            console.log(`Error ${error}`);              //en caso de error, mostrar el error
 
         }                              //buscar en el total
     }
+    BuscarTotal();
