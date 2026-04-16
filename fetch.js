@@ -30,7 +30,9 @@ fetch(url)
     })
     .then((datos) => {
         console.log(datos);                             // genero los mismos datos pero con un mejor manejo de errores
-    
+        for(let dato of datos){
+            console.log(`El producto es: ${dato.title} y su precio es: ${dato.price}`);   //imprimiendo el titulo y el precio de cada productoS
+        }
     })
     .catch((error)=> {
         console.log(`Error ${error}`);                  //en caso de error, mostrar el error  
