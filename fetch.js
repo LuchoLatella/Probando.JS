@@ -19,67 +19,102 @@
 
 // MEJORAR EL CÓDIGO DE FETCH
 
-const url = 'https://fakestoreapi.com/products';    //dejando constante la URL
+     const url = 'https://fakestoreapi.com/products';    //dejando constante la URL
 
-fetch(url)
-    .then((response)=>{
-        if(!response.ok){                               //viendo en caso de error
-            console.log('Error');
-        }
-        return response.json();                         // en caso ok, retornar el json
-    })
-    .then((datos) => {
-        console.log(datos);                             // genero los mismos datos pero con un mejor manejo de errores
-        for(let dato of datos){
-            console.log(`El producto es: ${dato.title} y su precio es: $ ${dato.price}`);   //imprimiendo el titulo y el precio de cada productoS
-        }
-    })
-    .catch((error)=> {
-        console.log(`Error ${error}`);                  //en caso de error, mostrar el error  
+// fetch(url)
+//     .then((response)=>{
+//         if(!response.ok){                               //viendo en caso de error
+//             console.log('Error');
+//         }
+//         return response.json();                         // en caso ok, retornar el json
+//     })
+//     .then((datos) => {
+//         console.log(datos);                             // genero los mismos datos pero con un mejor manejo de errores
+//         for(let dato of datos){
+//             console.log(`El producto es: ${dato.title} y su precio es: $ ${dato.price}`);   //imprimiendo el titulo y el precio de cada productoS
+//         }
+//     })
+//     .catch((error)=> {
+//         console.log(`Error ${error}`);                  //en caso de error, mostrar el error  
 
-    })
+    // })
 
 
-    // .then(res => res.json())
-    // .then(json=>console.log(json))
+//     // .then(res => res.json())
+//     // .then(json=>console.log(json))
 
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // USANDO ASYNC AWAIT para mejorar el código
+//     // USANDO ASYNC AWAIT para mejorar el código
 
-    async function BuscarTotal(){
-        try{
-            const response = await fetch(url);            //constante de la respuesta de la consulta
-            if(!response.ok){                               //viendo en caso de error
-            console.log('error');
-            }
-            const productos = await response.json();
-            console.log(productos);
+//     async function BuscarTotal(){
+//         try{
+//             const response = await fetch(url);            //constante de la respuesta de la consulta
+//             if(!response.ok){                               //viendo en caso de error
+//             console.log('error');
+//             }
+//             const productos = await response.json();
+//             console.log(productos);
 
-        }catch(error){
-            console.log(`Error ${error}`);              //en caso de error, mostrar el error
+//         }catch(error){
+//             console.log(`Error ${error}`);              //en caso de error, mostrar el error
 
-        }                              //buscar en el total
-    }
-    BuscarTotal();
+//         }                              //buscar en el total
+//     }
+//     BuscarTotal();
 
-    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // BUSCAR UN PRODUCTO EN PARTICULAR
 
-    async function BuscarporId(id){
-        try{
-            const response = await fetch(`${url}/${id}`);            //constante que marca el id a buscar en la API
-            if(!response.ok){                               //viendo en caso de error
-                console.log('error');
-            }
-            const producto = await response.json();
-                console.log(producto);
+    // async function BuscarporId(id){
+    //     try{
+    //         const response = await fetch(`${url}/${id}`);            //constante que marca el id a buscar en la API
+    //         if(!response.ok){                               //viendo en caso de error
+    //             console.log('error');
+    //         }
+    //         const producto = await response.json();
+    //             console.log(producto);
 
-        }catch(error){
-            console.log(`Error ${error}`);              //en caso de error, mostrar el error
+    //     }catch(error){
+    //         console.log(`Error ${error}`);              //en caso de error, mostrar el error
 
-        }                              //buscar en el total
-    }
+    //     }                              //buscar en el total
+    // }
     
-    BuscarporId(1);
+    // BuscarporId();
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// CREAR UN NUEVO PRODUCTO, ID 21 seria el nuevo producto
+
+    async function crearProducto(producto) {
+    try{
+        const resp = await fetch( url, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(producto)
+        })
+
+        if (!resp.ok){
+            console.log(`Error!`);
+        }
+
+        const pro = await resp.json();
+        console.log(pro);
+
+
+
+    }catch (error){
+        console.log(`Error! ${error}`);
+    } 
+}  
+
+const p = {
+    id:21,
+    title: 'Producto de Lucho',
+    price: 500
+}
+crearProducto(p);
