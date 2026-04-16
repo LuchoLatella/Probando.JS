@@ -43,8 +43,14 @@ fetch(url)
 
     async function BuscarTotal(){
         try{
+            const response = await fetch(url);            //constante de la respuesta de la consulta
+            if(!response.ok){                               //viendo en caso de error
+            console.log('Error');
+            }
+            const productos = await response.json();
+            console.log(productos);
 
         }catch{
-            
+
         }                              //buscar en el total
     }
