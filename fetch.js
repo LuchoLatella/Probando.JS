@@ -31,7 +31,7 @@ fetch(url)
     .then((datos) => {
         console.log(datos);                             // genero los mismos datos pero con un mejor manejo de errores
         for(let dato of datos){
-            console.log(`El producto es: ${dato.title} y su precio es: ${dato.price}`);   //imprimiendo el titulo y el precio de cada productoS
+            console.log(`El producto es: ${dato.title} y su precio es: $ ${dato.price}`);   //imprimiendo el titulo y el precio de cada productoS
         }
     })
     .catch((error)=> {
@@ -62,3 +62,24 @@ fetch(url)
         }                              //buscar en el total
     }
     BuscarTotal();
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // BUSCAR UN PRODUCTO EN PARTICULAR
+
+    async function BuscarporId(id){
+        try{
+            const response = await fetch(`${url}/${id}`);            //constante que marca el id a buscar en la API
+            if(!response.ok){                               //viendo en caso de error
+                console.log('error');
+            }
+            const producto = await response.json();
+                console.log(producto);
+
+        }catch(error){
+            console.log(`Error ${error}`);              //en caso de error, mostrar el error
+
+        }                              //buscar en el total
+    }
+    
+    BuscarporId(1);
